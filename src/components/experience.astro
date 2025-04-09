@@ -1,0 +1,27 @@
+---
+import { experienceData } from '../data/experience';
+---
+
+<section class="mb-24">
+  <h2 class="text-xs uppercase tracking-wider mb-8 text-gray-400 dark:text-gray-500">
+    Previously
+  </h2>
+
+  <div class="grid grid-cols-2 gap-y-8">
+    {experienceData.map((item) => (
+      <>
+        <div>
+          <h3 class="font-medium">{item.company}</h3>
+        </div>
+        <div class="space-y-4">
+          {item.positions.map((position) => (
+            <div>
+              <h3 class="font-medium">{position.title}</h3>
+              <p class="text-sm text-gray-400 dark:text-gray-500">{position.years}</p>
+            </div>
+          ))}
+        </div>
+      </>
+    ))}
+  </div>
+</section>

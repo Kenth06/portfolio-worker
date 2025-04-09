@@ -1,11 +1,33 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/header.astro';
+import Introduction from '../components/introduction.astro';
+import Experience from '../components/experience.astro';
+import Projects from '../components/projects.astro';
+import ContactSection from '../components/contactSection.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Get selected tag from URL query parameter if present
+const selectedTag = Astro.url.searchParams.get('tag') || '';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Kenneth - Portfolio">
+  <main>
+    <Header />
+    
+    <div class="container-padding flex flex-col md:flex-row">
+      <Introduction />
+      <div class="md:w-1/2">
+        <Experience />
+      </div>
+    </div>
+    
+    <!-- Projects section now uses the updated Projects component -->
+    <Projects selectedTag={selectedTag} />
+    
+    <ContactSection />
+  </main>
+
+  <footer class="container-padding py-8 text-center text-gray-500 dark:text-gray-400 text-sm">
+    <p>© {new Date().getFullYear()} Kenneth · Built with Astro</p>
+  </footer>
 </Layout>

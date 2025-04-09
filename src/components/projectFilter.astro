@@ -1,0 +1,43 @@
+---
+import { allTags } from '../data/projects';
+
+interface Props {
+  selectedTag?: string;
+}
+
+const { selectedTag = '' } = Astro.props;
+
+// Add "All" to the beginning of the tags
+const filterTags = ["All", ...allTags];
+
+// Standardize the tag categories to match the design
+const designTags = [
+  "All",
+  "Backend",
+  "Web Development",
+  "AI",
+  "API"
+];
+
+// Filter out tags that aren't in our design
+const displayTags = designTags.filter(tag => 
+  tag === "All" || allTags.includes(tag)
+);
+---
+
+<div class="mb-12">
+  <div class="flex flex-wrap gap-2 md:gap-3">
+    {displayTags.map(tag => (
+      <a 
+        href={tag === "All" ? "/" : `/?tag=${encodeURIComponent(tag)}`}
+        class={`px-4 py-2 rounded-full text-sm transition-colors ${
+          (tag === "All" && !selectedTag) || (tag === selectedTag)
+            ? 'bg-gray-900 dark:bg-white text-white dark:text-gray-900' 
+            : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-700'
+        }`}
+      >
+        {tag}
+      </a>
+    ))}
+  </div>
+</div>

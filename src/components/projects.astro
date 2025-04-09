@@ -1,0 +1,30 @@
+---
+import { projects, allTags } from '../data/projects';
+import ProjectCard from './projectCard.astro';
+import ProjectFilter from './projectFilter.astro';
+
+interface Props {
+  selectedTag?: string;
+}
+
+const { selectedTag = '' } = Astro.props;
+
+// Filter projects if a tag is selected
+const filteredProjects = selectedTag 
+  ? projects.filter(project => project.tags.includes(selectedTag))
+  : projects;
+---
+
+<div class="px-8 md:px-16 lg:px-24 pb-24">
+  <h2 class="text-xs uppercase tracking-wider mb-12 text-gray-400 dark:text-gray-500">
+    Projects
+  </h2>
+
+  <ProjectFilter selectedTag={selectedTag} />
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {filteredProjects.map((project) => (
+      <ProjectCard project={project} />
+    ))}
+  </div>
+</div>

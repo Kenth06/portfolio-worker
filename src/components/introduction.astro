@@ -1,0 +1,55 @@
+---
+import { getStartDate, calculateTimeWorking } from '../utils/timeWorking';
+import AnimatedLink from './animatedLink.astro';
+
+
+const startDate = getStartDate();
+const initialTime = calculateTimeWorking(startDate);
+---
+
+<section class="md:w-1/2">
+  <div class="mb-16">
+    <h1 class="text-2xl font-medium mb-8">
+      Hi, I&apos;m Kenneth.
+    </h1>
+    <p class="mb-6 max-w-md text-gray-800 dark:text-gray-300">
+      I&apos;ve been a Developer at 
+      <AnimatedLink href="https://rednbluepty.com/">
+        RednBlue
+      </AnimatedLink> 
+      for the last <span id="days">{initialTime.days}</span> days, <span id="hours">{initialTime.hours}</span> hours, 
+      <span id="minutes">{initialTime.minutes}</span> minutes, and <span id="seconds">{initialTime.seconds}</span> seconds.
+    </p>
+    <p class="max-w-md text-gray-800 dark:text-gray-300">
+      I live in Panamá. Keep up with me on
+      <AnimatedLink href="https://github.com/Kenth06">
+        Github
+      </AnimatedLink>
+    </p>
+    
+  </div>
+</section>
+
+<script>
+
+
+  import { getStartDate, calculateTimeWorking } from '../utils/timeWorking.ts';
+  
+  const startDate = getStartDate();
+  
+  // Update time counter
+  const updateTimeCounter = () => {
+    const time = calculateTimeWorking(startDate);
+    
+    document.getElementById('days')!.textContent = time.days.toString();
+    document.getElementById('hours')!.textContent = time.hours.toString();
+    document.getElementById('minutes')!.textContent = time.minutes.toString();
+    document.getElementById('seconds')!.textContent = time.seconds.toString();
+  };
+  
+  // Update counter every second
+  setInterval(updateTimeCounter, 1000);
+  
+  // Initial update
+  updateTimeCounter();
+</script>

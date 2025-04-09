@@ -1,0 +1,59 @@
+---
+// Light/dark mode toggle
+---
+
+<button
+  id="theme-toggle"
+  class="w-10 h-10 flex items-center justify-center mb-24 cursor-pointer"
+  aria-label="Toggle dark mode"
+>
+  <div id="dark-icon" class="hidden">
+    <!-- Moon icon -->
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width="24" 
+      height="24" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      stroke-width="2" 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      class="text-white"
+    >
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+    </svg>
+  </div>
+  <div id="light-icon" class="w-6 h-6 bg-black rounded-full animate-pulse hover:scale-110"></div>
+</button>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('theme-toggle');
+    const darkIcon = document.getElementById('dark-icon');
+    const lightIcon = document.getElementById('light-icon');
+    
+    // Check current theme
+    const updateThemeUI = () => {
+      const isDark = document.body.classList.contains('dark');
+      if (isDark) {
+        darkIcon?.classList.remove('hidden');
+        lightIcon?.classList.add('hidden');
+      } else {
+        darkIcon?.classList.add('hidden');
+        lightIcon?.classList.remove('hidden');
+      }
+    };
+    
+    // Initial update
+    updateThemeUI();
+    
+    // Toggle theme
+    toggleButton?.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const newTheme = document.body.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      updateThemeUI();
+    });
+  });
+</script>

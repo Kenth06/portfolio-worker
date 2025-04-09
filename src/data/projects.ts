@@ -14,7 +14,7 @@ export const projects: Project[] = [
     description:
       "A design system for enterprise applications with accessibility at its core.",
     tags: ["Design System", "API", "Backend", "Components"],
-    image: "/src/assets/projects/nebula.svg",
+    image: "/src/assets/nebula.svg",
     link: "#",
   },
   {
